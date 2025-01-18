@@ -26,7 +26,7 @@ class ProductController extends Controller
                 ->orWhere('price', $search);
         }
 
-        $products = $query->paginate(10);
+        $products = $query->paginate(4);
 
         return view('products.index', compact('products'));
     }
