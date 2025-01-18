@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductModel extends Model
 {
     use HasFactory;
+    protected $table = 'products'; // Ensure this matches your table name
 
     protected $fillable = [
         'product_id',
