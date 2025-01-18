@@ -128,4 +128,22 @@ public function update(Request $request, $id)
     return redirect()->route('products.list')->with('success', 'Product updated successfully.');
 }
 
+public function delete($id)
+{
+    // Find the product by ID
+    $product = ProductModel::findOrFail($id);
+
+    // Check and delete the product image if it exists
+    if ($product->image && file_exists(public_path('assets/products/' . $product->image))) {
+        unlink(public_path('assets/products/' . $product->image));
+    }
+
+    // Delete the product record from the database
+    $product->delete();
+
+    // Redirect back with a success message
+    return redirect()->route('products.list')->with('success', 'Product deleted successfully.');
+}
+
+
 }
