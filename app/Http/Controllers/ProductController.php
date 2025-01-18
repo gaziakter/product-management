@@ -82,4 +82,50 @@ class ProductController extends Controller
         $product = ProductModel::findOrFail($id);
         return view('products.show', compact('product'));
     }
+
+    public function edit($id)
+{
+    $product = ProductModel::findOrFail($id);
+    return view('products.edit', compact('product'));
+}
+
+public function update(Request $request, $id)
+{
+    $request->validate([
+        'product_id' => 'required|unique:products,product_id',
+        'name' => 'required',
+        'description' => 'nullable|string',
+        'price' => 'required|numeric',
+        'stock' => 'required|numeric',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $product = ProductModel::findOrFail($id);
+
+    // Update product fields
+    $product->product_id = $request->input('product_id');
+    $product->name = $request->input('name');
+    $product->description = $request->input('description');
+    $product->price = $request->input('price');
+    $product->stock = $request->input('stock');
+
+    // Handle image upload and deletion of the old image
+    if ($request->file('image')) {
+        // Delete the old image if it exists
+        if ($product->image && file_exists(public_path('assets/products/' . $product->image))) {
+            unlink(public_path('assets/products/' . $product->image));
+        }
+
+        // Upload the new image
+        $file = $request->file('image');
+        $filename = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension(); // Generate a unique name
+        $file->move(public_path('assets/products'), $filename);
+        $product->image = $filename; // Save the new image filename
+    }
+
+    $product->save();
+
+    return redirect()->route('products.list')->with('success', 'Product updated successfully.');
+}
+
 }

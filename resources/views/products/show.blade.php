@@ -34,7 +34,7 @@
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
-                        <a href="{{ route('products.index') }}" class="btn btn-secondary ms-auto">Back to Products</a>
+                        <a href="{{ route('products.list') }}" class="btn btn-secondary ms-auto">Back to Products</a>
                     </div>
                 </div>
             </div>
