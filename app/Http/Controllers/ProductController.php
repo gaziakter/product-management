@@ -76,4 +76,10 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'Failed to Create Product');
         }
     }
+
+    //show book list
+    public function specific($id){
+        $product = ProductModel::findOrFail($id);
+        return view('products.show', compact('product'));
+    }
 }

@@ -3,9 +3,11 @@
 @section('content')
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        @include('_message')
         <h1>Products</h1>
         <a href="{{ route('products.create') }}" class="btn btn-primary">Create New Product</a>
+    </div>
+    <div class="message mt-5 mb-5">
+        @include('_message')
     </div>
 
     <form method="GET" action="{{ route('products.index') }}" class="mb-3">
