@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     // Show All Products in index page
-    public function index(Request $request)
+    public function list(Request $request)
     {
         $query = ProductModel::query();
 
