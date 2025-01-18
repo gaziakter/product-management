@@ -48,7 +48,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Create Product</button>
-        <a href="{{ route('products.index') }}" class="btn btn-secondary">Cancel</a>
+        <a href="{{ route('products.list') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 @endsection
